@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>이미지 랜덤 배치</title>
+        <style>
+            @font-face {
+    font-family: 'Pretendard';
+    font-weight: 100;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 200;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraLight.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraLight.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraLight.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraLight.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraLight.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 300;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Light.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 800;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 900;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Black.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Black.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Black.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Black.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Black.ttf') format("truetype");
+    font-display: swap;
+}
+    
+            body {
+                font-family: 'Pretendard', sans-serif; /* 적용할 폰트 지정 */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                margin: 0;
+                overflow: hidden;
+                background-color: rgb(4, 0, 29);
+                position: relative;
+            }
+    
+            #overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: transparent;
+                z-index: 2;
+            }
+    
+            .wrapper-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+    
+            .visible-image,
+            .hidden-image {
+                max-width: 60%;
+                max-height: 70vh;
+                width: auto;
+                height: auto;
+                object-fit: cover;
+                position: absolute;
+                top: 42%;
+                left: 50%;
+                transition: opacity 0.3s ease, filter 0.3s ease;
+                transform: translate(-50%, -50%);
+                filter: blur(200px);
+            }
+    
+            .wrapper:last-child .visible-image,
+            .wrapper:last-child .image-text {
+                filter: blur(0);
+            }
+    
+            .touch .visible-image,
+            .touch .image-text {
+                filter: blur(0);
+            }
+    
+            .image-text {
+                font-size: 18px;
+                color: white;
+                position: absolute;
+                bottom: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                filter: blur(200px);
+                line-height: 1.4; /* 줄 간격 설정 */
+                font-weight: 500;
+            }
+    
+            .image-text::after {
+                content: "";
+                display: block;
+                width: 100%; /* 선의 길이 조절 가능 */
+                height: 1px;
+                background-color: white;
+                margin: 5px auto; /* 선의 위아래 여백 조절 가능 */
+            }
+
+            .party-text {
+            font-size: 12px;
+            color: white;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            } 
+        </style>
+    </head>
+<body>
+
+<div id="overlay"></div>
+<div class="wrapper-container" id="wrapper-container"></div>
+<div class="party-text">[2024] · 5, 6기 디학 연하장 파티 ·</div>
+
+<script>
+    function runTouchEffects(interval) {
+        var wrapper = document.querySelector('.wrapper:last-child');
+        wrapper.click();
+        if (interval < 300) {
+            setTimeout(function() {
+                runTouchEffects(interval * 1.1);
+            }, interval);
+        }
+    }
+
+    function getRandomPosition(containerWidth, containerHeight) {
+        var maxX = containerWidth - 80;
+        var maxY = containerHeight - 50;
+
+        var randomX = Math.floor(Math.random() * (maxX * 2 + 1)) - maxX;
+        var randomY = Math.floor(Math.random() * maxY);
+
+        return { x: randomX, y: randomY };
+    }
+
+    function shuffleImages() {
+        var wrapperContainer = document.getElementById('wrapper-container');
+        var imageElements = Array.from(document.querySelectorAll('.wrapper'));
+
+        imageElements.sort(function() {
+            return 0.5 - Math.random();
+        });
+
+        imageElements.forEach(function(imageElement) {
+            var position = getRandomPosition(wrapperContainer.offsetWidth, wrapperContainer.offsetHeight);
+            imageElement.style.left = position.x + 'px';
+            imageElement.style.top = position.y + 'px';
+            wrapperContainer.appendChild(imageElement);
+        });
+
+        setTimeout(function() {
+            runTouchEffects(200);
+        }, 0);
+    }
+
+    function bringToBack(element) {
+        var wrapperContainer = document.getElementById('wrapper-container');
+        wrapperContainer.classList.add('blur-effect');
+
+        setTimeout(function() {
+            wrapperContainer.classList.remove('blur-effect');
+        }, 300);
+
+        wrapperContainer.insertBefore(element, wrapperContainer.firstChild);
+    }
+
+    function addBlurEffect(element) {
+        var wrapper = element.closest('.wrapper');
+        wrapper.classList.add('touch');
+
+        setTimeout(function() {
+            wrapper.classList.remove('touch');
+        }, 300);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var wrapperContainer = document.getElementById('wrapper-container');
+        var overlay = document.getElementById('overlay');
+
+        var imageSources = [
+            { src: 'image1.jpg', text: '정민 <span style="opacity: 40%">(현주)</span><br><br>&nbsp;&nbsp;&nbsp;&nbsp;외래어 사자성어 사용 않고<br>가능한 우리말로 풀어서 쓰기' },
+            { src: 'image2.png', text: '우림 <span style="opacity: 40%">(우림)</span><br><br>&nbsp;&nbsp;&nbsp;&nbsp;자신의 얼굴이 들어간 엽서' },
+            { src: 'image3.png', text: '현주 <span style="opacity: 40%">(용식)</span><br><br>&nbsp;&nbsp;&nbsp;&nbsp;여름느낌의 남반구용 연하장' },
+            { src: 'image4.jpg', text: '효진 <span style="opacity: 40%">(정민)</span><br><br>&nbsp;&nbsp;&nbsp;&nbsp;화려함의 극치 엽서' },
+            { src: 'image5.jpg', text: '혜진 <span style="opacity: 40%">(효진)</span><br><br>&nbsp;&nbsp;&nbsp;&nbsp;<소주맥주> 글자 5회 이상 삽입' },
+            { src: 'image6.jpg', text: '용식 <span style="opacity: 40%">(우영)</span><br><br>&nbsp;&nbsp;&nbsp;&nbsp;컴퓨터로만 작업하지 않기' },
+            { src: 'image7.jpg', text: '우영 <span style="opacity: 40%">(은주)</span><br><br>&nbsp;&nbsp;&nbsp;&nbsp;선물같은 엽서!' }
+        ];
+
+        imageSources.forEach(function(data) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'wrapper';
+            wrapper.onclick = function() {
+                bringToBack(wrapper);
+            };
+            wrapper.ontouchend = function() {
+                addBlurEffect(wrapper);
+            };
+
+            var image = document.createElement('img');
+            image.src = data.src;
+            image.alt = '이미지';
+            image.className = 'visible-image';
+
+            var text = document.createElement('div');
+            text.className = 'image-text';
+            text.innerHTML = data.text;
+
+            wrapper.appendChild(image);
+            wrapper.appendChild(text);
+            wrapperContainer.appendChild(wrapper);
+        });
+
+        shuffleImages();
+    });
+
+    var overlay = document.getElementById('overlay');
+    overlay.addEventListener('click', function() {
+        runTouchEffects(300);
+    });
+</script>
+
+</body>
+</html>
