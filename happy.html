@@ -125,7 +125,7 @@ body {
             left: 0;
             width: 100%;
             height: 100%;
-            /* background: rgb(4, 0, 29); */
+            background: rgb(4, 0, 29);
             z-index: 2;
         }
 
@@ -311,6 +311,12 @@ body {
                 addBlurEffect(wrapper);
             };
 
+            var blur = document.createElement('img');
+            blur.src = data.src;
+            blur.alt = '이미지';
+            blur.className = 'visible-image';
+            blur.setAttribute("style", "filter: blur(40px);")
+
             var image = document.createElement('img');
             image.src = data.src;
             image.alt = '이미지';
@@ -320,6 +326,7 @@ body {
             text.className = 'image-text';
             text.innerHTML = data.text;
 
+            wrapper.appendChild(blur)
             wrapper.appendChild(image);
             wrapper.appendChild(text);
             wrapperContainer.appendChild(wrapper);
